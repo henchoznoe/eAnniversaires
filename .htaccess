@@ -1,0 +1,17 @@
+<IfModule mod_rewrite.c>
+
+  RewriteEngine On
+  # Définit la base pour toutes les règles de réécriture suivantes
+  RewriteBase /
+  # Ne réécrit pas les requêtes pour index.html
+  RewriteRule ^index\.html$ - [L]
+  # Conditions pour vérifier si le fichier demandé n'existe pas
+  RewriteCond %{REQUEST_FILENAME} !-f
+  # Condition pour vérifier si le répertoire demandé n'existe pas
+  RewriteCond %{REQUEST_FILENAME} !-d
+  # Condition pour vérifier si le lien symbolique demandé n'existe pas
+  RewriteCond %{REQUEST_FILENAME} !-l
+  # Si aucune des conditions ci-dessus n'est remplie, réécrit l'URL vers /index.html
+  RewriteRule . /index.html [L]
+
+</IfModule>
